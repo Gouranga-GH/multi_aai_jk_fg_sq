@@ -1,13 +1,13 @@
 pipeline{
     agent any
 
-    environment {
-        // SONAR_PROJECT_KEY = 'AGENTIC-AI-PROJECT'
-		// SONAR_SCANNER_HOME = tool 'Sonarqube'
-        // AWS_REGION = 'us-east-1'
-        // ECR_REPO = 'agentic-ai-repo'
-        // IMAGE_TAG = 'latest'
-	}
+    // environment {
+    //     SONAR_PROJECT_KEY = 'AGENTIC-AI-PROJECT'
+	// 	SONAR_SCANNER_HOME = tool 'Sonarqube'
+    //     AWS_REGION = 'us-east-1'
+    //     ECR_REPO = 'agentic-ai-repo'
+    //     IMAGE_TAG = 'latest'
+	// }
 
     stages{
         stage('Cloning Github repo to Jenkins'){
