@@ -3,7 +3,7 @@ pipeline{
 
     environment {
         SONAR_PROJECT_KEY = 'AGENTIC-AI-PROJECT'
-		SONAR_SCANNER_HOME = tool 'SonarQube'
+		SONAR_SCANNER_HOME = tool 'Sonarqube'
         AWS_REGION = 'us-east-1'
         ECR_REPO = 'agentic-ai-repo'
         IMAGE_TAG = 'latest'
@@ -14,16 +14,16 @@ pipeline{
             steps{
                 script{
                     echo 'Cloning Github repo to Jenkins............'
-                    checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[credentialsId: 'github-token', url: 'https://github.com/Gouranga-GH/multi_aai_jk_fg_sq.git']])
+                    checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[credentialsId: 'github-token', url: 'https://github.com/data-guru0/multi_aai_jk_fg_sq.git']])
                 }
             }
         }
 
     stage('SonarQube Analysis'){
 			steps {
-				withCredentials([string(credentialsId: 'global-analysis-token', variable: 'SONAR_TOKEN')]) {
+				withCredentials([string(credentialsId: 'sonarqube-token', variable: 'SONAR_TOKEN')]) {
     					
-					withSonarQubeEnv('SonarQube') {
+					withSonarQubeEnv('Sonarqube') {
     						sh """
 						${SONAR_SCANNER_HOME}/bin/sonar-scanner \
 						-Dsonar.projectKey=${SONAR_PROJECT_KEY} \
@@ -54,21 +54,21 @@ pipeline{
             }
         }
 
-    //     stage('Deploy to ECS Fargate') {
-    // steps {
-    //     withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'aws-token']]) {
-    //         script {
-    //             sh """
-    //             aws ecs update-service \
-    //               --cluster agentic-ai-cluster \
-    //               --service agentic-ai-service \
-    //               --force-new-deployment \
-    //               --region ${AWS_REGION}
-    //             """
-    //             }
-    //         }
-    //     }
-    //  }
+        stage('Deploy to ECS Fargate') {
+    steps {
+        withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'aws-token']]) {
+            script {
+                sh """
+                aws ecs update-service \
+                  --cluster agentic-ai-cluster-1 \
+                  --service aai_task-service-l6dbzswg \
+                  --force-new-deployment \
+                  --region ${AWS_REGION}
+                """
+                }
+            }
+        }
+     }
         
     }
 }
