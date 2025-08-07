@@ -2,6 +2,12 @@
 
 A comprehensive Agentic AI System that integrates the powerful llama3-70b-8192 model (Groq) with smart single-tool selection (Tavily search OR Wikipedia) to create an intelligent conversational agent. The AI automatically decides which single tool to use or uses no tools at all based on the user's query. The project demonstrates a complete CI/CD pipeline from development to production deployment on AWS.
 
+![AAI_1](screenshots/AAI_1.png)
+![AAI_2](screenshots/AAI_2.png)
+![AAI_3](screenshots/AAI_3.png)
+![AAI_4](screenshots/AAI_4.png)
+![AAI_5](screenshots/AAI_5.png)
+
 ## 🏗️ Project Structure
 
 ```
