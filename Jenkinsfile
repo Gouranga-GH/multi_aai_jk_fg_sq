@@ -3,7 +3,7 @@ pipeline{
 
     environment {
         SONAR_PROJECT_KEY = 'AGENTIC-AI-PROJECT'
-		SONAR_SCANNER_HOME = tool 'Sonarqube'
+		SONAR_SCANNER_HOME = tool 'SonarQube'
         AWS_REGION = 'us-east-1'
         ECR_REPO = 'agentic-ai-repo'
         IMAGE_TAG = 'latest'
@@ -23,7 +23,7 @@ pipeline{
 			steps {
 				withCredentials([string(credentialsId: 'sonarqube-token', variable: 'SONAR_TOKEN')]) {
     					
-					withSonarQubeEnv('Sonarqube') {
+					withSonarQubeEnv('SonarQube') {
     						sh """
 						${SONAR_SCANNER_HOME}/bin/sonar-scanner \
 						-Dsonar.projectKey=${SONAR_PROJECT_KEY} \
